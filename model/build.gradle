@@ -1,0 +1,17 @@
+plugins {
+    id 'java-library'
+    id 'org.jetbrains.kotlin.jvm'
+    id 'kotlin'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+ext{
+    kotlin_version = '1.7.20'
+}
+dependencies {
+     implementation  "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+}
