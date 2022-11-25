@@ -9,7 +9,14 @@ java {
 }
 ext {
     koin_version= "3.2.2"
+
+        coroutinesVersion ="1.6.4"
+
 }
 dependencies {
+    implementation project(path: ':model')
+    //coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
     implementation "io.insert-koin:koin-core:$koin_version"
 }

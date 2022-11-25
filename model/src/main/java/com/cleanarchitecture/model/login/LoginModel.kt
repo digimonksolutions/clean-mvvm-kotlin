@@ -6,6 +6,7 @@ data class LoginModel(
     val devicetoken: Any,
     val devicetype: Any,
     val email: String,
+    val password: String,
     val firstname: String,
     val id: Int,
     val lastname: String,
