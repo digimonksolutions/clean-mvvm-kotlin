@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="15dp"
+    android:layout_margin="@dimen/_15dp"
     android:background="@color/white"
-    app:cardCornerRadius="20dp">
+    app:cardCornerRadius="@dimen/_20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,8 +15,9 @@
         <ImageView
             android:id="@+id/ivBannerRaw"
             android:layout_width="match_parent"
-            android:layout_height="130dp"
+            android:layout_height="@dimen/_130dp"
             android:scaleType="fitCenter"
+            android:contentDescription="@string/clean_architecture"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -25,13 +26,12 @@
         <TextView
             android:id="@+id/tvTittleRaw"
             android:layout_width="0dp"
-            android:layout_height="80dp"
+            android:layout_height="@dimen/_80dp"
             android:singleLine="true"
             android:gravity="center"
-            android:text="Hello world"
             android:textColor="@color/white"
-            android:background="@color/black"
-            android:textSize="20sp"
+            android:background="@color/material_dynamic_primary30"
+            android:textSize="@dimen/_20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

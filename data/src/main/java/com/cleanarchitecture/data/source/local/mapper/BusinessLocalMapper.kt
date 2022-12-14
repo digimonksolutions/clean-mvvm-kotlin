@@ -1,7 +1,7 @@
 package com.cleanarchitecture.data.source.local.mapper
 
 import com.cleanarchitecture.data.source.local.model.BusinessDBModel
-import com.cleanarchitecture.model.business.BusinessModel
+import com.cleanarchitecture.domain.model.business.BusinessModel
 
 class BusinessLocalMapper {
 

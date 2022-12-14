@@ -1,7 +1,7 @@
 package com.cleanarchitecture.data.source.local.mapper
 
 import com.cleanarchitecture.data.source.local.model.LoginDBModel
-import com.cleanarchitecture.model.login.LoginModel
+import com.cleanarchitecture.domain.model.login.LoginModel
 
 class LoginLocalMapper {
     

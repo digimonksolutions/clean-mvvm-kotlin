@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.cleanarchitecture.R
-import com.cleanarchitecture.model.business.BusinessModel
+import com.cleanarchitecture.domain.model.business.BusinessModel
 import kotlinx.android.synthetic.main.item_raw_layout.view.*
 
 

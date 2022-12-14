@@ -1,7 +1,7 @@
 package com.cleanarchitecture.domain.interactor
 
 import com.cleanarchitecture.domain.repository.LocalRepository
-import com.cleanarchitecture.model.business.BusinessModel
+import com.cleanarchitecture.domain.model.business.BusinessModel
 import kotlinx.coroutines.flow.Flow
 
 class GetBusinessFromDBUseCase(private val localRepository: LocalRepository) {

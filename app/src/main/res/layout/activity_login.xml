@@ -1,119 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/color_background"
-    tools:context=".ui.login.LoginActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/tvHeading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Clean Architecture"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="22sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"/>
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="loginViewModel"
+            type="com.cleanarchitecture.ui.login.viewmodel.LoginViewModel" />
 
-    <TextView
-        android:id="@+id/tvLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:textColor="@color/white"
-        android:textSize="22sp"
-        app:layout_constraintTop_toBottomOf="@id/tvHeading"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="80dp"/>
+    </data>
 
-    <EditText
-        android:id="@+id/etSignInEmail"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="40dp"
-        android:background="@drawable/bg_rounded_gradiant_corner_tv"
-        android:gravity="center"
-        android:hint="Email"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:inputType="textEmailAddress"
-        android:padding="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvLogin"/>
+        android:layout_height="match_parent"
+        android:background="@color/color_background"
+        tools:context=".ui.login.LoginActivity">
 
-    <EditText
-        android:id="@+id/etSignInPassword"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="40dp"
-        android:textColorHint="@color/black"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="40dp"
-        android:textColor="@color/black"
+        <TextView
+            android:id="@+id/tvHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/clean_architecture"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="@dimen/_22sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/_20dp" />
 
-        android:background="@drawable/bg_rounded_gradiant_corner_tv"
-        android:gravity="center"
-        android:hint="password"
-        android:inputType="textPassword"
-        android:padding="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etSignInEmail" />
+        <TextView
+            android:id="@+id/tvLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_22sp"
+            app:layout_constraintTop_toBottomOf="@id/tvHeading"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/_80dp" />
 
-    <TextView
-        android:id="@+id/btnSignIn"
-        android:layout_width="120dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/bg_button_cream"
-        android:gravity="center"
-        android:text="Sign In"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etSignInPassword" />
+        <EditText
+            android:id="@+id/etSignInEmail"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50dp"
+            android:layout_marginStart="@dimen/_40dp"
+            android:layout_marginTop="@dimen/_40dp"
+            android:layout_marginEnd="@dimen/_40dp"
+            android:background="@drawable/bg_rounded_gradiant_corner_tv"
+            android:gravity="center"
+            android:hint="@string/email"
+            android:text="@={loginViewModel.email}"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:inputType="textEmailAddress"
+            android:padding="@dimen/_5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLogin" />
 
-    <TextView
-        android:id="@+id/btnSignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="Create Account?"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnSignIn" />
+        <EditText
+            android:id="@+id/etSignInPassword"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50dp"
+            android:layout_marginStart="@dimen/_40dp"
+            android:textColorHint="@color/black"
+            android:layout_marginTop="@dimen/_10dp"
+            android:layout_marginEnd="@dimen/_40dp"
+            android:textColor="@color/black"
+            android:text="@={loginViewModel.password}"
+            android:background="@drawable/bg_rounded_gradiant_corner_tv"
+            android:gravity="center"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:padding="@dimen/_5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etSignInEmail" />
 
-    <ProgressBar
-        android:id="@+id/pbLoader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:progressTint="@color/white"
-        android:progressBackgroundTint="@color/white"
-        android:foregroundTint="@color/white"
-        android:progressDrawable="@color/white"
-        android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        <TextView
+            android:id="@+id/btnSignIn"
+            android:layout_width="@dimen/_120dp"
+            android:layout_height="@dimen/_50dp"
+            android:layout_marginTop="@dimen/_40dp"
+            android:background="@drawable/bg_button_cream"
+            android:gravity="center"
+            android:text="@string/sign_in"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:onClick="@{ () -> loginViewModel.onSignInClick()}"
+            android:textSize="@dimen/_20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etSignInPassword" />
+
+        <TextView
+            android:id="@+id/btnSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10dp"
+            android:gravity="center"
+            android:text="@string/create_account"
+            android:textAllCaps="true"
+            android:onClick="navigateToSignUp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnSignIn" />
+
+        <ProgressBar
+            android:id="@+id/pbLoader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:progressTint="@color/white"
+            android:progressBackgroundTint="@color/white"
+            android:foregroundTint="@color/white"
+            android:progressDrawable="@color/white"
+            android:visibility="@{loginViewModel.loader ? View.VISIBLE : View.GONE}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
 
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

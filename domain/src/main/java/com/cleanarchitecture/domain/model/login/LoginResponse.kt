@@ -1,4 +1,4 @@
-package com.cleanarchitecture.model.login
+package com.cleanarchitecture.domain.model.login
 
 data class LoginResponse(
     val message: String,

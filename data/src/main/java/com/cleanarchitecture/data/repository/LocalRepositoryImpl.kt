@@ -5,8 +5,8 @@ import com.cleanarchitecture.data.source.local.db.BusinessDatabase
 import com.cleanarchitecture.data.source.local.mapper.BusinessLocalMapper
 import com.cleanarchitecture.data.source.local.mapper.LoginLocalMapper
 import com.cleanarchitecture.domain.repository.LocalRepository
-import com.cleanarchitecture.model.business.BusinessModel
-import com.cleanarchitecture.model.login.LoginModel
+import com.cleanarchitecture.domain.model.business.BusinessModel
+import com.cleanarchitecture.domain.model.login.LoginModel
 
 class LocalRepositoryImpl(private val context: Context,private val businessLocalMapper: BusinessLocalMapper, private val loginLocalMapper: LoginLocalMapper):LocalRepository {
     override suspend fun addBusiness(list: List<BusinessModel>): LongArray {

@@ -1,4 +1,4 @@
-package com.cleanarchitecture.model.business
+package com.cleanarchitecture.domain.model.business
 
 data class BusinessResponse(
     val `data`: List<BusinessModel?>?,

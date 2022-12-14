@@ -26,11 +26,11 @@ class Resource<T> private constructor(val status: Status, val data: T?, val mess
                 null
             )
         }
-        fun <T> empty(): Resource<T> {
+        fun <T> empty(message: String? = "null"): Resource<T> {
             return Resource(
                 Status.EMPTY,
                 null,
-                null
+                message
             )
         }
     }

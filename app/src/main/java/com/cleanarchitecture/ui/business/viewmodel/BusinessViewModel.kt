@@ -1,6 +1,7 @@
 package com.cleanarchitecture.ui.business.viewmodel
 
 import android.util.Log
+import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cleanarchitecture.data.Resource
@@ -8,13 +9,16 @@ import com.cleanarchitecture.domain.interactor.AddBusinessToDBUseCase
 import com.cleanarchitecture.domain.interactor.GetBusinessFromDBUseCase
 import com.cleanarchitecture.domain.interactor.GetBusinessUseCase
 import com.cleanarchitecture.domain.response.Response
-import com.cleanarchitecture.model.business.BusinessModel
-import com.cleanarchitecture.model.business.BusinessResponse
+import com.cleanarchitecture.domain.model.business.BusinessModel
+import com.cleanarchitecture.domain.model.business.BusinessResponse
+import com.cleanarchitecture.utils.AppConstants
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.Observable
 
 class BusinessViewModel(
     private val getBusinessUseCase: GetBusinessUseCase,
@@ -37,20 +41,35 @@ class BusinessViewModel(
     private val businessDbStateFlow =
         MutableStateFlow<Resource<List<BusinessModel>>>(Resource.empty())
 
+    val recyclerViewVisibility = ObservableBoolean()
+    val loaderVisibility = ObservableBoolean()
+
 
     /**
      * Get Business Data From Remote API
      * */
     fun getBusiness() {
         businessStateFlow.value = Resource.loading()
+        loaderVisibility.set(true)
+        recyclerViewVisibility.set(false)
         viewModelScope.launch {
-            val response = getBusinessUseCase.execute(BusinessResponse::class.java, "category")
+            val response = getBusinessUseCase.execute(BusinessResponse::class.java, AppConstants.getCategory)
             withContext(Dispatchers.Main) {
                 when (response.status) {
                     Response.Status.SUCCESS -> {
-                        businessStateFlow.value = Resource.success(response.data)
+                        if (response.data?.status == "success") {
+                            recyclerViewVisibility.set(true)
+                            loaderVisibility.set(false)
+                            businessStateFlow.value = Resource.success(response.data)
+                        }else{
+                            recyclerViewVisibility.set(false)
+                            loaderVisibility.set(false)
+                            businessDbStateFlow.value = Resource.empty(response.message)
+                        }
                     }
                     Response.Status.ERROR -> {
+                        recyclerViewVisibility.set(false)
+                        loaderVisibility.set(false)
                         businessStateFlow.value = Resource.error(response.message.toString())
                     }
                 }
@@ -63,13 +82,19 @@ class BusinessViewModel(
      * */
     fun getBusinessFromDB() {
         businessDbStateFlow.value = Resource.loading()
+        recyclerViewVisibility.set(false)
+        loaderVisibility.set(true)
         viewModelScope.launch {
             val response = getBusinessFromDBUseCase.execute()
             withContext(Dispatchers.Main) {
                 if (response.isNotEmpty()) {
+                    loaderVisibility.set(false)
+                    recyclerViewVisibility.set(true)
                     businessDbStateFlow.value = Resource.success(response)
                 } else {
-                    businessDbStateFlow.value = Resource.empty()
+                    loaderVisibility.set(false)
+                    recyclerViewVisibility.set(false)
+                    businessDbStateFlow.value = Resource.empty("No Data Found")
                 }
             }
         }
@@ -90,14 +115,14 @@ class BusinessViewModel(
         for (i in 0..15) {
             arrayList.add(
                 BusinessModel(
-                    "",
-                    "",
-                    "",
-                    i,
-                    "https://images.unsplash.com/1/type-away-numero-dos.jpg?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
-                    "Dummy $i",
-                    i,
-                    ""
+                    category_status = "",
+                    created_at = "",
+                    deleted_at = "",
+                    id = i,
+                    image_path = AppConstants.dummyImgUrl,
+                    name = "Dummy $i",
+                    order_num = i,
+                    updated_at = ""
                 )
             )
         }

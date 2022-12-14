@@ -8,7 +8,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.cleanarchitecture.data.source.local.dao.BusinessDao
 import com.cleanarchitecture.data.source.local.model.BusinessDBModel
 import com.cleanarchitecture.data.source.local.model.LoginDBModel
-import com.cleanarchitecture.model.login.LoginModel
+import com.cleanarchitecture.domain.model.login.LoginModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
