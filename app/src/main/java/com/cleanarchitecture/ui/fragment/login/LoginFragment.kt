@@ -1,0 +1,61 @@
+package com.cleanarchitecture.ui.fragment.login
+
+import android.os.Bundle
+import android.widget.Toast
+import com.cleanarchitecture.R
+import com.cleanarchitecture.data.Resource
+import com.cleanarchitecture.databinding.FragmentLoginBinding
+import com.cleanarchitecture.domain.model.login.LoginResponse
+import com.cleanarchitecture.ui.base.BaseFragment
+import com.cleanarchitecture.ui.fragment.login.viewmodel.LoginViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
+class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
+    override val layoutId: Int = R.layout.fragment_login
+    override val viewModel: LoginViewModel by viewModel()
+
+    override fun onReady(savedInstanceState: Bundle?) {
+        /**
+         *  Handle Response From Remote API
+         * */
+        handleLogin()
+
+
+        /**
+         *  Handle Response From Local Database
+         * */
+        handleLoginFromDB()
+
+    }
+
+    private fun handleLoginFromDB() {
+        viewModel.loginDBState.observe(viewLifecycleOwner) { state ->
+            when (state.status) {
+                Resource.Status.SUCCESS -> {}
+                Resource.Status.ERROR -> {
+                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                }
+                Resource.Status.EMPTY -> {
+                    Toast.makeText(requireContext(), "No User Found", Toast.LENGTH_SHORT).show()
+                }
+                Resource.Status.LOADING -> {}
+            }
+        }
+    }
+
+    private fun handleLogin() {
+        viewModel.loginDBState.observe(viewLifecycleOwner){ state ->
+            when (state.status) {
+                Resource.Status.SUCCESS -> {}
+                Resource.Status.ERROR -> {
+                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                }
+                Resource.Status.EMPTY -> {
+                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                }
+                Resource.Status.LOADING -> {}
+            }
+        }
+    }
+
+}

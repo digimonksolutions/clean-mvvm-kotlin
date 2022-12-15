@@ -1,5 +1,9 @@
 package com.cleanarchitecture.domain.model.business
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class BusinessModel(
     val category_status: String?,
     val created_at: String?,
@@ -9,4 +13,4 @@ data class BusinessModel(
     val name: String,
     val order_num: Int?,
     val updated_at: String?
-)
+) : Parcelable

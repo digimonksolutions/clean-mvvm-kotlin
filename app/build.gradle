@@ -1,8 +1,11 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-android-extensions'
+    id 'kotlin-parcelize'
     id 'kotlin-kapt'
+    id "androidx.navigation.safeargs.kotlin"
+
+
 }
 
 android {
@@ -42,6 +45,7 @@ ext {
     koin_version= "3.2.2"
     koin_android_version= "3.3.0"
     coroutinesVersion ="1.6.4"
+    navigation_version = "2.5.3"
 }
 
 dependencies {
@@ -56,6 +60,10 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
     implementation "com.github.bumptech.glide:glide:4.14.2"
+
+    //Fragment Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
 
     //Koin
     implementation "io.insert-koin:koin-core:$koin_version"

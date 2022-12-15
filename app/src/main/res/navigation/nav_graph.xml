@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.cleanarchitecture.ui.fragment.login.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/loginToBusinessList"
+            app:destination="@id/businessListFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/businessListFragment"
+        android:name="com.cleanarchitecture.ui.fragment.business.BusinessListFragment"
+        android:label="BusinessListFragment"
+        tools:layout="@layout/fragment_business_list">
+        <action
+            android:id="@+id/action_businessListFragment_to_businessDetailsFragment"
+            app:destination="@id/businessDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/businessDetailsFragment"
+        android:name="com.cleanarchitecture.ui.fragment.businessDetails.BusinessDetailsFragment"
+        android:label="BusinessDetailsFragment"
+        tools:layout="@layout/fragment_business_details">
+        <argument
+            android:name="businessModel"
+            android:defaultValue="@null"
+            app:argType="com.cleanarchitecture.domain.model.business.BusinessModel"
+            app:nullable="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.cleanarchitecture.ui.fragment.signup.SignUpFragment"
+        android:label="SignupFragment"
+        tools:layout="@layout/fragment_sign_up">
+        <action
+            android:id="@+id/action_signupFragment_to_businessListFragment"
+            app:destination="@id/businessListFragment" />
+    </fragment>
+
+
+</navigation>

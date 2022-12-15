@@ -7,9 +7,10 @@ import com.cleanarchitecture.data.source.local.mapper.LoginLocalMapper
 import com.cleanarchitecture.domain.interactor.*
 import com.cleanarchitecture.domain.repository.LocalRepository
 import com.cleanarchitecture.domain.repository.RemoteRepository
-import com.cleanarchitecture.ui.business.viewmodel.BusinessViewModel
-import com.cleanarchitecture.ui.login.viewmodel.LoginViewModel
-import com.cleanarchitecture.ui.signup.viewmodel.SignUpViewModel
+import com.cleanarchitecture.ui.fragment.business.viewmodel.BusinessViewModel
+import com.cleanarchitecture.ui.fragment.businessDetails.viewModel.BusinessDetailsViewModel
+import com.cleanarchitecture.ui.fragment.login.viewmodel.LoginViewModel
+import com.cleanarchitecture.ui.fragment.signup.viewmodel.SignUpViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -26,7 +27,7 @@ val loginModule = module {
 val signUpModule = module {
         single { LoginLocalMapper() }
         factory { CreateUserDbUseCase(get()) }
-        viewModel{ SignUpViewModel(get())}
+        viewModel{ SignUpViewModel(get()) }
 
 }
 
@@ -35,4 +36,8 @@ val businessModule = module {
         factory { AddBusinessToDBUseCase(get()) }
         factory { GetBusinessFromDBUseCase(get()) }
         viewModel { BusinessViewModel(get(),get(),get()) }
+}
+
+val businessDetailsModule = module {
+        viewModel{BusinessDetailsViewModel()}
 }

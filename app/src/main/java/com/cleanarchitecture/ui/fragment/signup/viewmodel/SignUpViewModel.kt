@@ -1,24 +1,21 @@
-package com.cleanarchitecture.ui.signup.viewmodel
+package com.cleanarchitecture.ui.fragment.signup.viewmodel
 
-import android.view.View
-import android.widget.EditText
-import android.widget.Toast
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cleanarchitecture.data.Resource
+import com.cleanarchitecture.databinding.FragmentSignUpBinding
 import com.cleanarchitecture.domain.interactor.CreateUserDbUseCase
 import com.cleanarchitecture.domain.model.login.LoginModel
-import com.cleanarchitecture.utils.AppConstants
-import kotlinx.android.synthetic.main.activity_sign_up.*
+import com.cleanarchitecture.ui.base.BaseViewModel
+import com.cleanarchitecture.ui.fragment.signup.SignUpFragmentDirections
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.Observable
 
-class SignUpViewModel(private val createUserDbUseCase: CreateUserDbUseCase):ViewModel() {
+class SignUpViewModel(private val createUserDbUseCase: CreateUserDbUseCase):BaseViewModel() {
 
     private val signUpStateFlow = MutableStateFlow<Resource<LoginModel>>(Resource.loading())
 
@@ -39,6 +36,7 @@ class SignUpViewModel(private val createUserDbUseCase: CreateUserDbUseCase):View
             createUserDbUseCase.execute(obj)
             withContext(Dispatchers.Main){
                 signUpStateFlow.value = Resource.success(null)
+                goToBusinessListFragment()
             }
         }
     }
@@ -72,6 +70,10 @@ class SignUpViewModel(private val createUserDbUseCase: CreateUserDbUseCase):View
                     )
                 )
             }
+    }
+
+    fun goToBusinessListFragment(){
+        navigate(SignUpFragmentDirections.actionSignupFragmentToBusinessListFragment())
     }
 
 }

@@ -2,6 +2,7 @@ package com.cleanarchitecture
 
 import android.app.Application
 import com.cleanarchitecture.data.source.remote.settings.Setting
+import com.cleanarchitecture.di.businessDetailsModule
 import com.cleanarchitecture.di.businessModule
 import com.cleanarchitecture.di.loginModule
 import com.cleanarchitecture.di.signUpModule
@@ -14,7 +15,7 @@ class StartClass : Application() {
         Setting.BASE_URL ="YOUR API BASE URL HERE"
         startKoin {
             androidContext(this@StartClass)
-            modules(loginModule, signUpModule,businessModule)
+            modules(loginModule, signUpModule,businessModule, businessDetailsModule)
         }
     }
 }

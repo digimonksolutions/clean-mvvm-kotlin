@@ -1,8 +1,10 @@
-package com.cleanarchitecture.ui.login.viewmodel
+package com.cleanarchitecture.ui.fragment.login.viewmodel
 
 import androidx.databinding.ObservableBoolean
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavDirections
 import com.cleanarchitecture.data.Resource
 import com.cleanarchitecture.domain.interactor.CreateUserDbUseCase
 import com.cleanarchitecture.domain.interactor.GetLoginUseCase
@@ -10,7 +12,11 @@ import com.cleanarchitecture.domain.interactor.GetUserDBUseCase
 import com.cleanarchitecture.domain.response.Response
 import com.cleanarchitecture.domain.model.login.LoginModel
 import com.cleanarchitecture.domain.model.login.LoginResponse
+import com.cleanarchitecture.navigation.NavigationCommand
+import com.cleanarchitecture.ui.base.BaseViewModel
+import com.cleanarchitecture.ui.fragment.login.LoginFragmentDirections
 import com.cleanarchitecture.utils.AppConstants
+import com.cleanarchitecture.utils.Event
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,27 +27,25 @@ class LoginViewModel(
     private val getLoginUseCase: GetLoginUseCase,
     private val getUserDBUseCase: GetUserDBUseCase,
     private val createUserDbUseCase: CreateUserDbUseCase
-) : ViewModel() {
+) : BaseViewModel() {
 
     init {
         createDummyUser()
     }
 
-    private val loginStateFlow = MutableStateFlow<Resource<LoginResponse>>(Resource.loading())
-    private val loginDBStateFlow = MutableStateFlow<Resource<LoginModel>>(Resource.loading())
+     val loginState = MutableLiveData<Resource<LoginResponse>>(Resource.loading())
+     val loginDBState = MutableLiveData<Resource<LoginModel>>()
     var email:String = ""
     var password:String = ""
     val loader = ObservableBoolean()
-    val loginState: StateFlow<Resource<LoginResponse>>
-        get() = loginStateFlow
-    val loginDBState: StateFlow<Resource<LoginModel>>
-        get() = loginDBStateFlow
+
+
 
     /**
      * Get Login response From Remote API
      * */
     fun getLogin(hashMap: HashMap<String, String>) {
-        loginStateFlow.value = Resource.loading()
+        loginState.value = Resource.loading()
         loader.set(true)
         viewModelScope.launch {
             val response = getLoginUseCase.execute(LoginResponse::class.java, AppConstants.getLogin, hashMap)
@@ -50,15 +54,16 @@ class LoginViewModel(
                     Response.Status.SUCCESS -> {
                         if(response.data?.status == "success") {
                             loader.set(false)
-                            loginStateFlow.value = Resource.success(response.data)
+                            loginState.value = Resource.success(response.data)
+                            goToDetailsPage()
                         }else{
                             loader.set(false)
-                            loginStateFlow.value = Resource.empty(response.data?.message)
+                            loginState.value = Resource.empty(response.data?.message)
                         }
                     }
                     Response.Status.ERROR -> {
                         loader.set(false)
-                        loginStateFlow.value = Resource.error(response.message.toString())
+                        loginState.value = Resource.error(response.message.toString())
                     }
                 }
             }
@@ -69,18 +74,19 @@ class LoginViewModel(
      *  Get Login Data From Local DataBase
      * */
     fun getLoginFromDB(email: String, password: String) {
-        loginDBStateFlow.value = Resource.loading()
+        loginDBState.value = Resource.loading()
         loader.set(true)
         viewModelScope.launch {
             val response = getUserDBUseCase.execute(email, password)
             withContext(Dispatchers.Main) {
                 if (response != null) {
                     loader.set(false)
-                    loginDBStateFlow.value = Resource.success(response)
+                    loginDBState.value = Resource.success(response)
+                    goToDetailsPage()
                 }
                 else {
                     loader.set(false)
-                    loginDBStateFlow.value = Resource.empty()
+                    loginDBState.value = Resource.empty()
                 }
             }
         }
@@ -138,6 +144,14 @@ class LoginViewModel(
             keyValues["android"] = "android"
         }
         getLogin(keyValues)
+    }
+
+    fun goToDetailsPage(){
+        navigate(LoginFragmentDirections.loginToBusinessList())
+    }
+
+    fun goToSignupPage(){
+        navigate(LoginFragmentDirections.actionLoginFragmentToSignupFragment())
     }
 
 }

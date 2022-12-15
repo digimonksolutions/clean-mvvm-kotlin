@@ -1,43 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/_15dp"
-    android:background="@color/white"
-    app:cardCornerRadius="@dimen/_20dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+        <variable
+            name="businessModel"
+            type="com.cleanarchitecture.domain.model.business.BusinessModel" />
+        <variable
+            name="viewModel"
+            type="com.cleanarchitecture.ui.fragment.business.viewmodel.BusinessViewModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_15dp"
+        android:onClick="@{() -> viewModel.navigateToDetailsPage(businessModel)}"
+        android:background="@color/white"
+        app:cardCornerRadius="@dimen/_20dp">
 
-        <ImageView
-            android:id="@+id/ivBannerRaw"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_130dp"
-            android:scaleType="fitCenter"
-            android:contentDescription="@string/clean_architecture"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/ivBannerRaw"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_130dp"
+                android:scaleType="fitCenter"
+                android:contentDescription="@string/clean_architecture"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-        <TextView
-            android:id="@+id/tvTittleRaw"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_80dp"
-            android:singleLine="true"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:background="@color/material_dynamic_primary30"
-            android:textSize="@dimen/_20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivBannerRaw" />
+            <TextView
+                android:id="@+id/tvTittleRaw"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_80dp"
+                android:singleLine="true"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:background="@color/material_dynamic_primary30"
+                android:textSize="@dimen/_20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivBannerRaw" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
 

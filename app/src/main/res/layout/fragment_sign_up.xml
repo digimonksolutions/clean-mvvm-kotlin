@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="signUpViewModel"
-            type="com.cleanarchitecture.ui.signup.viewmodel.SignUpViewModel" />
+            name="viewModel"
+            type="com.cleanarchitecture.ui.fragment.signup.viewmodel.SignUpViewModel" />
 
         <variable
             name="appConstant"
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/color_background"
-        tools:context=".ui.login.LoginActivity">
+        tools:context=".ui.activity.login.LoginActivity">
 
         <TextView
             android:id="@+id/tvHeading"
@@ -103,7 +103,7 @@
         <EditText
             android:id="@+id/etSignInEmail"
             error="@{appConstant.emailErrorMessage}"
-            errorVisible="@{signUpViewModel.emailError}"
+            errorVisible="@{viewModel.emailError}"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50dp"
             android:layout_marginStart="@dimen/_40dp"
@@ -114,7 +114,7 @@
             android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:padding="@dimen/_5dp"
-            android:text="@={signUpViewModel.email}"
+            android:text="@={viewModel.email}"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
@@ -124,7 +124,7 @@
         <EditText
             android:id="@+id/etSignInPassword"
             error="@{appConstant.passwordErrorMessage}"
-            errorVisible="@{signUpViewModel.passwordError}"
+            errorVisible="@{viewModel.passwordError}"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50dp"
             android:layout_marginStart="@dimen/_40dp"
@@ -133,7 +133,7 @@
             android:background="@drawable/bg_rounded_gradiant_corner_tv"
             android:gravity="center"
             android:hint="@string/password"
-            android:text="@={signUpViewModel.password}"
+            android:text="@={viewModel.password}"
             android:inputType="textPassword"
             android:padding="@dimen/_5dp"
             android:textColor="@color/black"
@@ -149,7 +149,7 @@
             android:layout_marginTop="@dimen/_40dp"
             android:background="@drawable/bg_button_cream"
             android:gravity="center"
-            android:onClick="@{()->signUpViewModel.onClickOfSignUp()}"
+            android:onClick="@{()->viewModel.onClickOfSignUp()}"
             android:text="@string/sign_up"
             android:textAllCaps="true"
             android:textColor="@color/white"

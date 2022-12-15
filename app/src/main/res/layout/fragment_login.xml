@@ -6,8 +6,8 @@
     <data>
         <import type="android.view.View"/>
         <variable
-            name="loginViewModel"
-            type="com.cleanarchitecture.ui.login.viewmodel.LoginViewModel" />
+            name="viewModel"
+            type="com.cleanarchitecture.ui.fragment.login.viewmodel.LoginViewModel" />
 
     </data>
 
@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/color_background"
-        tools:context=".ui.login.LoginActivity">
+        tools:context=".ui.activity.login.LoginActivity">
 
         <TextView
             android:id="@+id/tvHeading"
@@ -53,7 +53,7 @@
             android:background="@drawable/bg_rounded_gradiant_corner_tv"
             android:gravity="center"
             android:hint="@string/email"
-            android:text="@={loginViewModel.email}"
+            android:text="@={viewModel.email}"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:inputType="textEmailAddress"
@@ -71,7 +71,7 @@
             android:layout_marginTop="@dimen/_10dp"
             android:layout_marginEnd="@dimen/_40dp"
             android:textColor="@color/black"
-            android:text="@={loginViewModel.password}"
+            android:text="@={viewModel.password}"
             android:background="@drawable/bg_rounded_gradiant_corner_tv"
             android:gravity="center"
             android:hint="@string/password"
@@ -91,7 +91,7 @@
             android:text="@string/sign_in"
             android:textAllCaps="true"
             android:textColor="@color/white"
-            android:onClick="@{ () -> loginViewModel.onSignInClick()}"
+            android:onClick="@{ () -> viewModel.onSignInClick()}"
             android:textSize="@dimen/_20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -106,7 +106,7 @@
             android:gravity="center"
             android:text="@string/create_account"
             android:textAllCaps="true"
-            android:onClick="navigateToSignUp"
+            android:onClick="@{() -> viewModel.goToSignupPage()}"
             android:textColor="@color/white"
             android:textSize="@dimen/_15sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -121,7 +121,7 @@
             android:progressBackgroundTint="@color/white"
             android:foregroundTint="@color/white"
             android:progressDrawable="@color/white"
-            android:visibility="@{loginViewModel.loader ? View.VISIBLE : View.GONE}"
+            android:visibility="@{viewModel.loader ? View.VISIBLE : View.GONE}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
