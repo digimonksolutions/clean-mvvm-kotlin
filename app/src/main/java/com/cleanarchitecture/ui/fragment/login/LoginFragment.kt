@@ -28,32 +28,33 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 
     }
 
-    private fun handleLoginFromDB() {
-        viewModel.loginDBState.observe(viewLifecycleOwner) { state ->
+    private fun handleLogin() {
+        viewModel.loginState.observe(viewLifecycleOwner) { state ->
             when (state.status) {
                 Resource.Status.SUCCESS -> {}
                 Resource.Status.ERROR -> {
                     Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
                 }
                 Resource.Status.EMPTY -> {
-                    Toast.makeText(requireContext(), "No User Found", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
                 }
                 Resource.Status.LOADING -> {}
             }
         }
     }
 
-    private fun handleLogin() {
+    private fun handleLoginFromDB() {
         viewModel.loginDBState.observe(viewLifecycleOwner){ state ->
-            when (state.status) {
+            when (state.getContentIfNotHandled()?.status) {
                 Resource.Status.SUCCESS -> {}
                 Resource.Status.ERROR -> {
-                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), state.peekContent().message, Toast.LENGTH_SHORT).show()
                 }
                 Resource.Status.EMPTY -> {
-                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "User Not Found", Toast.LENGTH_SHORT).show()
                 }
                 Resource.Status.LOADING -> {}
+                else -> {}
             }
         }
     }

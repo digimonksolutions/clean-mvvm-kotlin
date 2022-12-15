@@ -34,7 +34,7 @@ class LoginViewModel(
     }
 
      val loginState = MutableLiveData<Resource<LoginResponse>>(Resource.loading())
-     val loginDBState = MutableLiveData<Resource<LoginModel>>()
+     val loginDBState = MutableLiveData<Event<Resource<LoginModel>>>()
     var email:String = ""
     var password:String = ""
     val loader = ObservableBoolean()
@@ -74,19 +74,19 @@ class LoginViewModel(
      *  Get Login Data From Local DataBase
      * */
     fun getLoginFromDB(email: String, password: String) {
-        loginDBState.value = Resource.loading()
+        loginDBState.value = Event(Resource.loading())
         loader.set(true)
         viewModelScope.launch {
             val response = getUserDBUseCase.execute(email, password)
             withContext(Dispatchers.Main) {
                 if (response != null) {
                     loader.set(false)
-                    loginDBState.value = Resource.success(response)
+                    loginDBState.value = Event(Resource.success(response))
                     goToDetailsPage()
                 }
                 else {
                     loader.set(false)
-                    loginDBState.value = Resource.empty()
+                    loginDBState.value = Event(Resource.empty())
                 }
             }
         }
