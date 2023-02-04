@@ -1,11 +1,10 @@
-package com.cleanarchitecture.ui.base
+package com.digi.base_module.base
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 
@@ -17,7 +16,7 @@ abstract class BaseAdapters<BINDING : ViewDataBinding,VM:ViewModel,T>(
     @get:LayoutRes
     abstract val layoutId: Int
 
-    abstract fun bind(binding: BINDING, item: T, position: Int, holder: BaseViewHolder<BINDING>,viewModel: VM)
+    abstract fun bind(binding: BINDING, item: T, position: Int, holder: BaseViewHolder<BINDING>, viewModel: VM)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<BINDING> {
         val binder = DataBindingUtil.inflate<BINDING>(
@@ -26,7 +25,6 @@ abstract class BaseAdapters<BINDING : ViewDataBinding,VM:ViewModel,T>(
             parent,
             false
         )
-        binder.setVariable(BR.viewModel,viewModel)
         return BaseViewHolder(binder)
     }
 
@@ -34,7 +32,7 @@ abstract class BaseAdapters<BINDING : ViewDataBinding,VM:ViewModel,T>(
         data?.get(position)?.let { bind(holder.binder, it, position,holder,viewModel) }
     }
 
-    override fun getItemCount(): Int = data!!.size
+    override fun getItemCount(): Int = data?.size ?: 0
 }
 
 class BaseViewHolder<BINDING : ViewDataBinding>(val binder: BINDING) :

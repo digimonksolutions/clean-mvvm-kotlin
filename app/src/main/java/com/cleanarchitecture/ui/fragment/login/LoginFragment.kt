@@ -5,8 +5,7 @@ import android.widget.Toast
 import com.cleanarchitecture.R
 import com.cleanarchitecture.data.Resource
 import com.cleanarchitecture.databinding.FragmentLoginBinding
-import com.cleanarchitecture.domain.model.login.LoginResponse
-import com.cleanarchitecture.ui.base.BaseFragment
+import com.digi.base_module.base.BaseFragment
 import com.cleanarchitecture.ui.fragment.login.viewmodel.LoginViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -15,6 +14,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
     override val viewModel: LoginViewModel by viewModel()
 
     override fun onReady(savedInstanceState: Bundle?) {
+        binding.viewModel = viewModel
         /**
          *  Handle Response From Remote API
          * */

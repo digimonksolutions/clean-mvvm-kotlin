@@ -1,11 +1,11 @@
-package com.cleanarchitecture.ui.base
+package com.digi.base_module.base
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavDirections
-import com.cleanarchitecture.navigation.NavigationCommand
-import com.cleanarchitecture.utils.Event
+import com.digi.base_module.navigation.NavigationCommand
+import com.digi.base_module.utils.Event
 
 abstract class BaseViewModel : ViewModel() {
 

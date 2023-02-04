@@ -1,4 +1,4 @@
-package com.cleanarchitecture.ui.base
+package com.digi.base_module.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,9 +9,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.cleanarchitecture.BR
-import com.cleanarchitecture.navigation.NavigationCommand
-import com.cleanarchitecture.utils.observeNonNull
+import com.digi.base_module.navigation.NavigationCommand
+import com.digi.base_module.utils.observeNonNull
 
 abstract class BaseFragment<BINDING : ViewDataBinding, VM : BaseViewModel>() : Fragment() {
 
@@ -38,7 +37,6 @@ abstract class BaseFragment<BINDING : ViewDataBinding, VM : BaseViewModel>() : F
 
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
-            setVariable(BR.viewModel,viewModel)
         }
         return binding.root
     }

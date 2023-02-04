@@ -8,18 +8,19 @@ import com.cleanarchitecture.data.Resource
 import com.cleanarchitecture.databinding.FragmentBusinessListBinding
 import com.cleanarchitecture.domain.model.business.BusinessModel
 import com.cleanarchitecture.domain.model.business.BusinessResponse
-import com.cleanarchitecture.ui.base.BaseFragment
+import com.digi.base_module.base.BaseFragment
 import com.cleanarchitecture.ui.fragment.business.adapter.BusinessAdapter
 import com.cleanarchitecture.ui.fragment.business.viewmodel.BusinessViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class BusinessListFragment : BaseFragment<FragmentBusinessListBinding,BusinessViewModel>() {
+class BusinessListFragment : BaseFragment<FragmentBusinessListBinding, BusinessViewModel>() {
     override val layoutId: Int
         get() = R.layout.fragment_business_list
     override val viewModel: BusinessViewModel by viewModel()
 
     override fun onReady(savedInstanceState: Bundle?) {
+        binding.viewModel = viewModel
 
         /**
          *  Get Business From Remote API

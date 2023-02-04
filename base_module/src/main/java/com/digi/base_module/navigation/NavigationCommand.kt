@@ -1,4 +1,4 @@
-package com.cleanarchitecture.navigation
+package com.digi.base_module.navigation
 
 import androidx.navigation.NavDirections
 

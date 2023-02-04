@@ -2,9 +2,7 @@ package com.cleanarchitecture.ui.fragment.login.viewmodel
 
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavDirections
 import com.cleanarchitecture.data.Resource
 import com.cleanarchitecture.domain.interactor.CreateUserDbUseCase
 import com.cleanarchitecture.domain.interactor.GetLoginUseCase
@@ -12,14 +10,11 @@ import com.cleanarchitecture.domain.interactor.GetUserDBUseCase
 import com.cleanarchitecture.domain.response.Response
 import com.cleanarchitecture.domain.model.login.LoginModel
 import com.cleanarchitecture.domain.model.login.LoginResponse
-import com.cleanarchitecture.navigation.NavigationCommand
-import com.cleanarchitecture.ui.base.BaseViewModel
+import com.digi.base_module.base.BaseViewModel
 import com.cleanarchitecture.ui.fragment.login.LoginFragmentDirections
 import com.cleanarchitecture.utils.AppConstants
-import com.cleanarchitecture.utils.Event
+import com.digi.base_module.utils.Event
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 

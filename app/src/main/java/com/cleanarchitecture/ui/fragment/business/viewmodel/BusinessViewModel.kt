@@ -2,7 +2,6 @@ package com.cleanarchitecture.ui.fragment.business.viewmodel
 
 import android.util.Log
 import androidx.databinding.ObservableBoolean
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cleanarchitecture.data.Resource
 import com.cleanarchitecture.domain.interactor.AddBusinessToDBUseCase
@@ -11,16 +10,14 @@ import com.cleanarchitecture.domain.interactor.GetBusinessUseCase
 import com.cleanarchitecture.domain.response.Response
 import com.cleanarchitecture.domain.model.business.BusinessModel
 import com.cleanarchitecture.domain.model.business.BusinessResponse
-import com.cleanarchitecture.ui.base.BaseViewModel
+import com.digi.base_module.base.BaseViewModel
 import com.cleanarchitecture.ui.fragment.business.BusinessListFragmentDirections
 import com.cleanarchitecture.utils.AppConstants
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.Observable
 
 class BusinessViewModel(
     private val getBusinessUseCase: GetBusinessUseCase,

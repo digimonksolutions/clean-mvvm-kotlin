@@ -1,13 +1,11 @@
 package com.cleanarchitecture.ui.fragment.signup.viewmodel
 
 import androidx.databinding.ObservableBoolean
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cleanarchitecture.data.Resource
-import com.cleanarchitecture.databinding.FragmentSignUpBinding
 import com.cleanarchitecture.domain.interactor.CreateUserDbUseCase
 import com.cleanarchitecture.domain.model.login.LoginModel
-import com.cleanarchitecture.ui.base.BaseViewModel
+import com.digi.base_module.base.BaseViewModel
 import com.cleanarchitecture.ui.fragment.signup.SignUpFragmentDirections
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,7 +13,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class SignUpViewModel(private val createUserDbUseCase: CreateUserDbUseCase):BaseViewModel() {
+class SignUpViewModel(private val createUserDbUseCase: CreateUserDbUseCase): BaseViewModel() {
 
     private val signUpStateFlow = MutableStateFlow<Resource<LoginModel>>(Resource.loading())
 
