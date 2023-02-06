@@ -23,4 +23,12 @@ class BusinessDetailsFragment : BaseFragment<FragmentBusinessDetailsBinding, Bus
         }
     }
 
+    override fun onNetworkAvailable() {
+
+    }
+
+    override fun onNetworkLost() {
+
+    }
+
 }

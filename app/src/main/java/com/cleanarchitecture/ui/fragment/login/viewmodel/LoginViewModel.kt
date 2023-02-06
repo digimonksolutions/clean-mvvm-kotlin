@@ -4,9 +4,7 @@ import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.cleanarchitecture.data.Resource
-import com.cleanarchitecture.domain.interactor.CreateUserDbUseCase
-import com.cleanarchitecture.domain.interactor.GetLoginUseCase
-import com.cleanarchitecture.domain.interactor.GetUserDBUseCase
+import com.cleanarchitecture.domain.interactor.*
 import com.cleanarchitecture.domain.response.Response
 import com.cleanarchitecture.domain.model.login.LoginModel
 import com.cleanarchitecture.domain.model.login.LoginResponse
@@ -21,7 +19,9 @@ import kotlinx.coroutines.withContext
 class LoginViewModel(
     private val getLoginUseCase: GetLoginUseCase,
     private val getUserDBUseCase: GetUserDBUseCase,
-    private val createUserDbUseCase: CreateUserDbUseCase
+    private val createUserDbUseCase: CreateUserDbUseCase,
+    private val saveUserLoginUseCase: SaveUserLoginUseCase,
+    private val getUserLoginUseCase: GetUserLoginUseCase
 ) : BaseViewModel() {
 
     init {
@@ -147,6 +147,14 @@ class LoginViewModel(
 
     fun goToSignupPage(){
         navigate(LoginFragmentDirections.actionLoginFragmentToSignupFragment())
+    }
+
+    fun saveUserLogin(isLoggedIn:Boolean){
+        saveUserLoginUseCase.execute(isLoggedIn)
+    }
+
+    fun getUserLogin():Boolean{
+        return getUserLoginUseCase.execute()
     }
 
 }

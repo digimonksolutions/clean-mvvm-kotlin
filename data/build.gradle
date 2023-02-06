@@ -30,6 +30,10 @@ android {
         jvmTarget = '1.8'
     }
 }
+ext{
+    koin_version= "3.2.2"
+
+}
 
 dependencies {
 
@@ -51,4 +55,7 @@ dependencies {
 
     //okhttp3
     implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2'
+    //KOIN
+    implementation "io.insert-koin:koin-core:$koin_version"
+
 }

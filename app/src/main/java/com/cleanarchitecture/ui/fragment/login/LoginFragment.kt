@@ -7,6 +7,8 @@ import com.cleanarchitecture.data.Resource
 import com.cleanarchitecture.databinding.FragmentLoginBinding
 import com.digi.base_module.base.BaseFragment
 import com.cleanarchitecture.ui.fragment.login.viewmodel.LoginViewModel
+import com.digi.base_module.extensions.observe
+import com.digi.base_module.extensions.toastMessage
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
@@ -24,19 +26,23 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         /**
          *  Handle Response From Local Database
          * */
-        handleLoginFromDB()
+        if (viewModel.getUserLogin()){
+            viewModel.goToDetailsPage()
+        }else{
+            handleLoginFromDB()
+        }
 
     }
 
     private fun handleLogin() {
-        viewModel.loginState.observe(viewLifecycleOwner) { state ->
+        observe(viewModel.loginState){ state ->
             when (state.status) {
                 Resource.Status.SUCCESS -> {}
                 Resource.Status.ERROR -> {
-                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                    requireContext().toastMessage(state.message)
                 }
                 Resource.Status.EMPTY -> {
-                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                    requireContext().toastMessage(state.message)
                 }
                 Resource.Status.LOADING -> {}
             }
@@ -44,19 +50,30 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
     }
 
     private fun handleLoginFromDB() {
-        viewModel.loginDBState.observe(viewLifecycleOwner){ state ->
+
+        observe(viewModel.loginDBState){ state ->
             when (state.getContentIfNotHandled()?.status) {
-                Resource.Status.SUCCESS -> {}
+                Resource.Status.SUCCESS -> {
+                    viewModel.saveUserLogin(true)
+                }
                 Resource.Status.ERROR -> {
-                    Toast.makeText(requireContext(), state.peekContent().message, Toast.LENGTH_SHORT).show()
+                    requireContext().toastMessage(state.peekContent().message)
                 }
                 Resource.Status.EMPTY -> {
-                    Toast.makeText(requireContext(), "User Not Found", Toast.LENGTH_SHORT).show()
+                    requireContext().toastMessage("User Not Found")
                 }
                 Resource.Status.LOADING -> {}
                 else -> {}
             }
         }
+    }
+
+    override fun onNetworkAvailable() {
+
+    }
+
+    override fun onNetworkLost() {
+
     }
 
 }

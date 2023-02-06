@@ -11,6 +11,7 @@ import com.cleanarchitecture.domain.model.business.BusinessResponse
 import com.digi.base_module.base.BaseFragment
 import com.cleanarchitecture.ui.fragment.business.adapter.BusinessAdapter
 import com.cleanarchitecture.ui.fragment.business.viewmodel.BusinessViewModel
+import com.digi.base_module.extensions.toastMessage
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -51,10 +52,10 @@ class BusinessListFragment : BaseFragment<FragmentBusinessListBinding, BusinessV
                 binding.adapter = BusinessAdapter(requireContext(), resource.data,viewModel)
             }
             Resource.Status.EMPTY -> {
-                Toast.makeText(requireContext(), resource.message, Toast.LENGTH_SHORT).show()
+                requireContext().toastMessage(resource.message)
             }
             Resource.Status.ERROR -> {
-                Toast.makeText(requireContext(), resource.message, Toast.LENGTH_SHORT).show()
+                requireContext().toastMessage(resource.message)
             }
             Resource.Status.LOADING -> {}
         }
@@ -68,14 +69,22 @@ class BusinessListFragment : BaseFragment<FragmentBusinessListBinding, BusinessV
                 binding.adapter = BusinessAdapter(requireContext(), data?.data,viewModel)
             }
             Resource.Status.ERROR -> {
-                Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                requireContext().toastMessage(state.message)
             }
             Resource.Status.EMPTY -> {
-                Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                requireContext().toastMessage(state.message)
             }
             Resource.Status.LOADING -> {}
         }
 
+
+    }
+
+    override fun onNetworkAvailable() {
+
+    }
+
+    override fun onNetworkLost() {
 
     }
 

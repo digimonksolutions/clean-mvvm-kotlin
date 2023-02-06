@@ -16,4 +16,12 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding, SignUpViewModel>() {
         binding.viewModel = viewModel
     }
 
+    override fun onNetworkAvailable() {
+
+    }
+
+    override fun onNetworkLost() {
+
+    }
+
 }
